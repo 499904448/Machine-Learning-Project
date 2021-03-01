@@ -9,6 +9,16 @@ body {
   line-height: 1.5;
   color: #606c71; }
 
+#vid1 {
+  margin: auto;
+  width: 95%;
+  height: 300px;
+  margin-bottom: 5px;}
+
+iframe {
+  width: 100%;
+  height: 100%;}
+
 a {
   color: #1e6bb8;
   text-decoration: none; }
