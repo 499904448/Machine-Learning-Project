@@ -1,73 +1,110 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>Machine-learning-project by jli952</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">Machine-learning-project</h1>
-      <h2 class="project-tagline"></h2>
-      <a href="https://github.gatech.edu/jli952/Machine-Learning-Project" class="btn">View on GitHub</a>
-    </section>
+    <head>
+        <meta charset="UTF-8">
+        <title>Machine-learning-project by jli952</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    </head>
+    <body>
+        <section class="page-header">
+            <h1 class="project-name">Machine-learning-project</h1>
+            <h2 class="project-tagline"></h2>
+            <a href="https://github.gatech.edu/jli952/Machine-Learning-Project" class="btn">View on GitHub</a>
+        </section>
 
-    <section class="main-content">
-      <h3>
-<a id="introductionbackground" class="anchor" href="#introductionbackground" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introduction/Background</h3>
-<p>COVID-19 has been the most pressing issue in current times across the globe. Due to the massive impact COVID-19 has had on our lives and the risk it poses to our health, medical professionals have worked tirelessly to obtain more information on the virus to make the world safer (Pascarella, 2020). We wish to contribute to this noble effort through our project.</p>
-<h3>
-<a id="problem-definition" class="anchor" href="#problem-definition" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Problem definition</h3>
-<p>Because COVID-19 has varying symptoms and requires significant time from medical professionals to diagnose, we hope to enhance the accuracy and efficiency of COVID-19 diagnosis and reduce the time and error involved in diagnosing the virus. By developing two diagnostic models, trained on distinct datasets, this project hopes to evaluate the accuracy of machine learning-based diagnosis and further understanding the relative importance of various types of diagnostic data.</p>
-<h3>
-<a id="methods" class="anchor" href="#methods" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Methods</h3>
-<p>Our first model will be a convolutional neural network (CNN) trained on a dataset containing labeled chest X-rays. This dataset contains X-rays from COVID patients, but is relatively small. However, it has been used to successfully train an image classifier in a previous study (Sahlol, 2020). Additionally, we have a much larger dataset containing only X-rays from healthy individuals and patients suffering from non-COVID diseases that can be used to supplement our data. To make up for this class imbalance we will use class balanced focal loss when training our network.
-</p>
-<p>For our second model we plan to implement a support vector machine that will be trained on a dataset with 8 binary features specifying symptom and demographic information for each individual as well as their COVID diagnosis. This dataset has also been used for training in previous machine learning research (Zoabi, 2021).
-</p>
-<h3>
-<a id="potential-results" class="anchor" href="#potential-results" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Potential results</h3>
-<p>By doing a CNN as our first model to determine the accuracy of COVID-19 prediction based on chest X-rays, we hope the accuracy result will be as high as we expect. The problem we may face during this process is that we may lack chest X-ray samples for COVID versus non-COVID patients. Hope by using other X-rays for other diseases will help improve our data. We have high confidence in our second model since the datasets are large enough for us to implement a support vector machine sufficiently to determine the COVID diagnosis among other symptoms.</p>
-<h3>
-<a id="discussion" class="anchor" href="#discussion" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Discussion</h3>
-<p>A clear application of the models trained in this project is immediate deployment to identify COVID-19 in symptomatic or at-risk individuals. Beyond the pandemic, the models developed  can also be extended to aid in the diagnosis of other flu-like viruses (through methods such as transfer learning) using chest X-rays or a list of provided symptoms.
-</p>
-<p>The available data presents potential difficulties for supervised learning. Due to the small size of the chest X-ray dataset and the low dimension of the symptom dataset, it is difficult to train a model to generalize to all cases. In addition, validating the model’s performance will be more difficult as there will be less data to test with. Despite these challenges, we believe the dataset we have will yield viable models and a feasible project.
-</p>
-<h3>
-<a id="dataset-sources" class="anchor" href="#dataset-sources" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dataset Sources</h3>
-<p>
-<ul>
-  <li>Chest X-ray Dataset: <a href="https://github.com/ieee8023/covid-chestxray-dataset">https://github.com/ieee8023/covid-chestxray-dataset</a></li>
-  <li>Symptom Dataset: <a href="https://github.com/nshomron/covidpred">https://github.com/nshomron/covidpred</a></li>
-  <li>Pneumonia Dataset: <a href="https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia">https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia</a></li>
-</ul>  
-</p>
-<h3>
-<a id="sources" class="anchor" href="#sources" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Sources</h3>
-<p>
-<dl>
-  <dt><a href="https://onlinelibrary.wiley.com/doi/full/10.1111/joim.13091">https://onlinelibrary.wiley.com/doi/full/10.1111/joim.13091</a></dt>
-  <dd>Pascarella, Giuseppe, et al. “COVID‐19 Diagnosis and Management: a Comprehensive Review.” Journal of Internal Medicine, vol. 288, no. 2, 2020, pp. 192–206., doi:10.1111/joim.13091</dd>
-  <dt><a href="https://www.nature.com/articles/s41746-020-00372-6">https://www.nature.com/articles/s41746-020-00372-6</a></dt>
-  <dd>Zoabi, Y., Deri-Rozov, S. & Shomron, N. Machine learning-based prediction of COVID-19 diagnosis based on symptoms. npj Digit. Med. 4, 3 (2021). https://doi.org/10.1038/s41746-020-00372-6</dd>
-  <dt><a href="https://www.nature.com/articles/s41598-020-71294-2">https://www.nature.com/articles/s41598-020-71294-2</a></dt>
-  <dd>Sahlol, A.T., Yousri, D., Ewees, A.A. et al. COVID-19 image classification using deep features and fractional-order marine predators algorithm. Sci Rep 10, 15364 (2020). <a href="https://doi.org/10.1038/s41598-020-71294-2">https://doi.org/10.1038/s41598-020-71294-2</a></dd>
-</dl>
-</p>
+        <section class="main-content">
+            <h3>
+                <a id="introductionbackground" class="anchor" href="#introductionbackground" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introduction/Background
+            </h3>
+            <p>
+                COVID-19 has been the most pressing issue in current times across the globe. Due to the massive impact COVID-19 has had on our lives and the risk it poses to our health, medical professionals have worked tirelessly to obtain more information on the virus to make the world safer (Pascarella, 2020). We wish to contribute to this noble effort through our project.
+            </p>
 
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.gatech.edu/jli952/Machine-Learning-Project">Machine-learning-project</a> is maintained by <a href="https://github.gatech.edu/jli952">jli952</a>.</span>
 
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
+            <h3>
+                <a id="problem-definition" class="anchor" href="#problem-definition" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Problem definition
+            </h3>
+            <p>
+                Because COVID-19 has varying symptoms and requires significant time from medical professionals to diagnose, we hope to enhance the accuracy and efficiency of COVID-19 diagnosis and reduce the time and error involved in diagnosing the virus. By developing two diagnostic models, trained on distinct datasets, this project hopes to evaluate the accuracy of machine learning-based diagnosis and further understanding the relative importance of various types of diagnostic data.
+            </p>
 
-    </section>
+
+            <h3>
+                <a id="methods" class="anchor" href="#methods" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Methods
+            </h3>
+            <p>
+                Our first model will be a convolutional neural network (CNN) trained on a dataset containing labeled chest X-rays. This dataset contains X-rays from COVID patients, but is relatively small. However, it has been used to successfully train an image classifier in a previous study (Sahlol, 2020). Additionally, we have a much larger dataset containing only X-rays from healthy individuals and patients suffering from non-COVID diseases that can be used to supplement our data. To make up for this class imbalance we will use class balanced focal loss when training our network.
+            </p>
+            <p>
+                For our second model we plan to implement a support vector machine that will be trained on a dataset with 8 binary features specifying symptom and demographic information for each individual as well as their COVID diagnosis. This dataset has also been used for training in previous machine learning research (Zoabi, 2021).
+            </p>
+
+
+            <h3>
+                <a id="potential-results" class="anchor" href="#potential-results" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Potential results
+            </h3>
+            <p>
+                By doing a CNN as our first model to determine the accuracy of COVID-19 prediction based on chest X-rays, we hope the accuracy result will be as high as we expect. The problem we may face during this process is that we may lack chest X-ray samples for COVID versus non-COVID patients. Hope by using other X-rays for other diseases will help improve our data. We have high confidence in our second model since the datasets are large enough for us to implement a support vector machine sufficiently to determine the COVID diagnosis among other symptoms.
+            </p>
+
+
+            <h3>
+                <a id="discussion" class="anchor" href="#discussion" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Discussion
+            </h3>
+            <p>
+                A clear application of the models trained in this project is immediate deployment to identify COVID-19 in symptomatic or at-risk individuals. Beyond the pandemic, the models developed  can also be extended to aid in the diagnosis of other flu-like viruses (through methods such as transfer learning) using chest X-rays or a list of provided symptoms.
+            </p>
+            <p>
+                The available data presents potential difficulties for supervised learning. Due to the small size of the chest X-ray dataset and the low dimension of the symptom dataset, it is difficult to train a model to generalize to all cases. In addition, validating the model’s performance will be more difficult as there will be less data to test with. Despite these challenges, we believe the dataset we have will yield viable models and a feasible project.
+            </p>
+
+
+            <h3>
+                <a id="dataset-sources" class="anchor" href="#dataset-sources" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dataset Sources
+            </h3>
+            <p>
+                <ul>
+                    <li>Chest X-ray Dataset: <a href="https://github.com/ieee8023/covid-chestxray-dataset">https://github.com/ieee8023/covid-chestxray-dataset</a></li>
+                    <li>Symptom Dataset: <a href="https://github.com/nshomron/covidpred">https://github.com/nshomron/covidpred</a></li>
+                    <li>Pneumonia Dataset: <a href="https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia">https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia</a></li>
+                </ul>  
+            </p>
+
+
+            <h3>
+                <a id="proposal-video" class="anchor" href="#proposal-video" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Proposal Video
+            </h3>
+            <p>
+                <iframe src = "https://www.youtube.com/embed/kWtzxSg9nao" name = "myVideo"></iframe>
+            </p>
+
+
+            <h3>
+                <a id="sources" class="anchor" href="#sources" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Sources
+            </h3>
+            <p>
+                <dl>
+                    <dt><a href="https://onlinelibrary.wiley.com/doi/full/10.1111/joim.13091">https://onlinelibrary.wiley.com/doi/full/10.1111/joim.13091</a></dt>
+                        <dd>Pascarella, Giuseppe, et al. “COVID‐19 Diagnosis and Management: a Comprehensive Review.” Journal of Internal Medicine, vol. 288, no. 2, 2020, pp. 192–206., doi:10.1111/joim.13091</dd>
+                    <dt><a href="https://www.nature.com/articles/s41746-020-00372-6">https://www.nature.com/articles/s41746-020-00372-6</a></dt>
+                        <dd>Zoabi, Y., Deri-Rozov, S. & Shomron, N. Machine learning-based prediction of COVID-19 diagnosis based on symptoms. npj Digit. Med. 4, 3 (2021). https://doi.org/10.1038/s41746-020-00372-6</dd>
+                    <dt><a href="https://www.nature.com/articles/s41598-020-71294-2">https://www.nature.com/articles/s41598-020-71294-2</a></dt>
+                        <dd>Sahlol, A.T., Yousri, D., Ewees, A.A. et al. COVID-19 image classification using deep features and fractional-order marine predators algorithm. Sci Rep 10, 15364 (2020). <a href="https://doi.org/10.1038/s41598-020-71294-2">https://doi.org/10.1038/s41598-020-71294-2</a></dd>
+                </dl>
+            </p>
+
+            <footer class="site-footer">
+                <span class="site-footer-owner"><a href="https://github.gatech.edu/jli952/Machine-Learning-Project">Machine-learning-project</a> is maintained by <a href="https://github.gatech.edu/jli952">jli952</a>.</span>
+
+                <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+            </footer>
+
+        </section>
 
   
-  </body>
+    </body>
 </html>
