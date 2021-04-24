@@ -72,13 +72,13 @@
                 organized in a GitHub and is free to download. The dataset contains images of X-rays from people with COVID-19, people with a different respiratory illness, and 
                 people who are healthy. An example of each type of image is shown below:
             </p>
-                <img src="images/covid_xray.jpeg" alt="covid xray" class="center">
+                <img src="images/covid_xray.jpeg" alt="covid xray" class="center-50">
                 <center>This X-ray is from a COVID positive individual</center>
             <br>
-                <img src="images/ecoli_xray.jpg" alt="ecoli xray" class="center">
+                <img src="images/ecoli_xray.jpg" alt="ecoli xray" class="center-50">
                 <center>This X-ray is from a patient suffering from a bacterial respiratory infection</center>
             <br>
-                <img src="images/healthy_xray.jpeg" alt="healthy xray" class="center">
+                <img src="images/healthy_xray.jpeg" alt="healthy xray" class="center-50">
                 <center>This X-ray is from a healthy individual</center>
             <p>
                 We also incorporated the pneumonia dataset linked at the bottom of this report. This pneumonia dataset was from a Kaggle challenge and provided many more examples 
@@ -101,7 +101,7 @@
             </p>
             <h5>
                 <b>[Logistic Regression with PCA]</b>
-            </h>
+            </h5>
             <p>
                 We ran Logistic regression with PCA on our <a href="Dataset/corona_data.csv" target="_blank">corona_data.csv</a>. This dataset uses binary labels. A label of 0 
                 corresponds to a negative coronavirus test result and 1 corresponds to a positive coronavirus test result. There are 8 features in this dataset. Seven of the features 
@@ -201,7 +201,7 @@
                 </span></a>
             </h3>
             <h5><b>[CNN Results]</b></h5>
-            <img src="images/loss_acc_curves.PNG" alt="Cross Entropy Loss and Accuracy Curves for CNN" class="center">
+            <img src="images/loss_acc_curves.PNG" alt="Cross Entropy Loss and Accuracy Curves for CNN" class="center-50">
             <center>Cross Entropy Loss and Accuracy Curves for CNN</center>
             <p>
                 The figure shown above includes the loss and accuracy curves for our CNN trained on the small COVID dataset using cross entropy loss for 100 epochs. While the 
@@ -216,7 +216,7 @@
                 examples. Increasing training time, increases EMC. This results in a loss curve which decreases at first, sharply increases as EMC approaches the number of training 
                 examples, and then decreases again as EMC increases beyond the number of training examples.
             </p>
-            <img src="images/focal_loss_and_acc_curves.JPG" alt="Class Balanced Focal Loss and Accuracy Curves" class="center">
+            <img src="images/focal_loss_and_acc_curves.JPG" alt="Class Balanced Focal Loss and Accuracy Curves" class="center-50">
             <center>Class Balanced Focal Loss and Accuracy Curves</center>
             <p>
                 This figure shown above visualizes the loss and accuracy curves for our CNN trained on the combined COVID and pneumonia datasets using class balanced focal loss 
@@ -353,8 +353,8 @@
                 false negatives to ensure that people do not unknowingly spread the disease, even if more healthy individuals are diagnosed as ill. 
             </p>
             <p>
-                Further steps to improve the performance of an SVM model then revolved around addressing the ability to classify severely unbalanced classes. Indeed, relative to all 
-                other hyperparameters, artificially adjusting the ratio of positive to negative cases in the training data had the largest effect on the model’s performance. 
+                Further steps to improve the performance of an SVM model revolve around addressing the ability to classify severely unbalanced classes. Indeed, relative to all other 
+                hyperparameters, artificially adjusting the ratio of positive to negative cases in the training data had the largest effect on the model’s performance. 
             </p>
             <p>
                 Ensemble learning was unable to improve the accuracy of the model. In addition, any further hyperparameters tuned were unable to improve the performance of the SVM. 
@@ -380,14 +380,14 @@
                 By merging datasets and adapting our training regime to a new loss function we developed a CNN with an accuracy of ~84%. This accuracy is still significantly below 
                 the >97% accuracy of human professionals, but it could still be high enough to act as a preliminary classifier that prioritizes patients based on likelihood of a 
                 positive COVID diagnosis. Prioritizing patients would have a large impact on the healthcare response to COVID and allow doctors and other medical professionals to 
-                more efficiently allocate their time. Another useful application of this model in a clinical setting could be as a diagnostic confirmation. A human diagnostician 
+                more efficiently allocate their time. Another useful application of this model in a clinical setting could be for diagnostic confirmation. A human diagnostician 
                 could use this model to confirm their own diagnoses and increase accuracy as well as their confidence.
             </p>
             <h5><b>[Logistic Regression with PCA]</b></h5>
             <p>
-                After Comparing the performance of logistic regression with PCA(0.85 variance retained) and logistic regression without PCA, we get that not only does PCA not 
-                impact the accuracy, but also PCA speeds up the training process of logistic regression. We conclude performing PCA before Logistic regression is better. As we 
-                compare this model to other models we tried, this may be the best one to use.
+                After Comparing the performance of logistic regression with PCA(0.85 variance retained) and logistic regression without PCA, we get that not only does PCA not impact 
+                the accuracy, but also PCA speeds up the training process of logistic regression. We conclude performing PCA before Logistic regression is better. As we compare this 
+                model to other models we tried, this may be the best one to use.
             </p>
             <h5><b>[Feature selection using lasso and ridge regression Conclusion]</b></h5>
             <p>
@@ -406,7 +406,7 @@
             <h5><b>[KNN Conclusion]</b></h5>
             <p>
                 Even though the KNN model yielded better accuracy, precision, recall, and F-beta after the optimization of the hyperparameter, the precision, recall, and F-beta 
-                scores were not significantly high enough that it can be concluded that the model is not doing well at classifying positive COVID-19 cases. 
+                scores were not high enough for us to conclude that the model is doing well at classifying positive COVID-19 cases. 
             </p>
 
             <h3>
