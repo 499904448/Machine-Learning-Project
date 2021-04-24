@@ -36,34 +36,41 @@
 
         <section class="main-content">
             <h3>
-                <a id="introductionbackground" class="anchor" href="#introductionbackground" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introduction/Background
+                <a id="introductionbackground" class="anchor" href="#introductionbackground" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link">
+                    Introduction/Background
+                </span></a>
             </h3>
             <p>
-                COVID-19 has been the most pressing issue in current times across the globe. Due to the massive impact COVID-19 has had on our lives and the risk it poses to our health, medical professionals 
-                have worked tirelessly to obtain more information on the virus to make the world safer (Pascarella, 2020). We wish to contribute to this noble effort through our project.
+                COVID-19 has been the most pressing issue in current times across the globe. Due to the massive impact COVID-19 has had on our lives and the risk it poses to our 
+                health, medical professionals have worked tirelessly to obtain more information on the virus to make the world safer (Pascarella, 2020). We wish to contribute to 
+                this noble effort through our project.
             </p>
 
 
             <h3>
-                <a id="problem-definition" class="anchor" href="#problem-definition" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Problem definition
+                <a id="problem-definition" class="anchor" href="#problem-definition" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link">
+                    Problem definition
+                </span></a>
             </h3>
             <p>
-                Because COVID-19 has varying symptoms and requires significant time from medical professionals to diagnose, we hope to enhance the accuracy and efficiency of COVID-19 diagnosis and reduce the 
-                time and error involved in diagnosing the virus. By developing two diagnostic models, trained on distinct datasets, this project hopes to evaluate the accuracy of machine learning-based diagnosis 
-                and further understanding the relative importance of various types of diagnostic data.
+                Because COVID-19 has varying symptoms and requires significant time from medical professionals to diagnose, we hope to enhance the accuracy and efficiency of COVID-19 
+                diagnosis and reduce the time and error involved in diagnosing the virus. By developing two diagnostic models, trained on distinct datasets, this project hopes to 
+                evaluate the accuracy of machine learning-based diagnosis and further understanding the relative importance of various types of diagnostic data.
             </p>
 
 
             <h3>
-                <a id="dataCollection" class="anchor" href="#dataCollection" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Data collection
+                <a id="dataCollection" class="anchor" href="#dataCollection" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link">
+                    Data collection
+                </span></a>
             </h3>
             <h5>
                 <b>[Data Transforms for CNN]</b>            
             </h5>
             <p>
-                We used the COVID Chest X-ray Dataset linked at the end of this report to train a Convolutional Neural Network (CNN). This dataset was convenient because it is organized in a GitHub and is free 
-                to download. The dataset contains images of X-rays from people with COVID-19, people with a different respiratory illness, and people who are healthy. An example of each type of image is shown 
-                below:
+                We used the COVID Chest X-ray Dataset linked at the end of this report to train a Convolutional Neural Network (CNN). This dataset was convenient because it is 
+                organized in a GitHub and is free to download. The dataset contains images of X-rays from people with COVID-19, people with a different respiratory illness, and 
+                people who are healthy. An example of each type of image is shown below:
             </p>
                 <img src="images/covid_xray.jpeg" alt="covid xray" class="center">
                 <center>This X-ray is from a COVID positive individual</center>
@@ -74,53 +81,64 @@
                 <img src="images/healthy_xray.jpeg" alt="healthy xray" class="center">
                 <center>This X-ray is from a healthy individual</center>
             <p>
-                Another benefit of this dataset is that it is supported by the Python library “torchxrayvision”. “torchxrayvision” is a Python library that supports many different X-ray datasets and provides a 
-                data loader that works with Pytorch. Unfortunately, the X-ray images contained in this dataset are not of uniform size and shape. The input images for our CNN must all be the same size because 
-                our CNN incorporates fully connected layers that require fixed sized inputs. To solve this problem we transformed each image. Each image was resized to 224x224 pixels and had a center crop 
-                applied to it if it was not already square. Applying these image transforms to all of our data guaranteed that every image fed into our network was of valid size.
+                We also incorporated the pneumonia dataset linked at the bottom of this report. This pneumonia dataset was from a Kaggle challenge and provided many more examples 
+                of healthy individuals and individuals with pneumonia. This was extremely helpful as these types of images were underrepresented within our COVID dataset because 
+                it focuses primarily on COVID. One tremendous benefit from using these two datasets is that they are both supported by the Python library “torchxrayvision”. 
+                “torchxrayvision” is a Python library that supports many different X-ray datasets and provides a data loader that works with Pytorch. Unfortunately, the X-ray 
+                images contained across these two datasets are not of uniform size and shape. The input images for our CNN must all be the same size because our CNN incorporates 
+                fully connected layers that require fixed sized inputs. To solve this problem we transformed each image. Each image was resized to 224x224 pixels and had a center 
+                crop applied to it if it was not already square. Applying these image transforms to all of our data guaranteed that every image fed into our network was of valid size.
             </p>
             <h5>
                 <b>[Data Cleaning]</b>            
             </h5>
             <p>
-                A CSV file containing categorical symptoms (cough, fever, sore throat, shortness of breath, and headache), age, gender, and exposure data was found online. This dataset had three primary issues: 
-                categorical values were listed as strings instead of numbers, inconclusive COVID test results were listed, and many data points had one or more missing values for particular features. First, any 
-                data points indicating an inconclusive result were removed. Text values were then replaced by integer values by mapping values through a dictionary. Next, missing values were imputed by K-Nearest 
-                Neighbors. The value of a missing feature was imputed using the most common value of the 5 nearest neighbors. 
+                A CSV file containing categorical symptoms (cough, fever, sore throat, shortness of breath, and headache), age, gender, and exposure data was found online. This 
+                dataset had three primary issues: categorical values were listed as strings instead of numbers, inconclusive COVID test results were listed, and many data points had 
+                one or more missing values for particular features. First, any data points indicating an inconclusive result were removed. Text values were then replaced by integer 
+                values by mapping values through a dictionary. Next, missing values were imputed by K-Nearest Neighbors. The value of a missing feature was imputed using the most 
+                common value of the 5 nearest neighbors. 
             </p>
             <h5>
                 <b>[Logistic Regression with PCA]</b>
             </h>
             <p>
-                We ran Logistic regression with PCA on our <a href="Dataset/corona_data.csv" target="_blank">corona_data.csv</a>. This dataset uses binary labels. A label of 0 corresponds to a negative coronavirus test result and 1 corresponds to a positive 
-                coronavirus test result. There are 8 features in this dataset. Seven of the features are binary features and represent gender, cough, fever, sore throat, shortness of breath, headache, and 
-                whether a patient’s age is above or below 60. All six features only take on two values 0 for false, and 1 for true.  A 0 for the gender feature represents male and a 1 represents female. The 
-                final feature is the reason that the individual is being tested. This feature can take any one of three values. A 2 for this feature means the individual traveled abroad, a 1 means that this 
-                person had confirmed contact with an infected individual and a 0 means their reason for testing was other. More details in the result section.
+                We ran Logistic regression with PCA on our <a href="Dataset/corona_data.csv" target="_blank">corona_data.csv</a>. This dataset uses binary labels. A label of 0 
+                corresponds to a negative coronavirus test result and 1 corresponds to a positive coronavirus test result. There are 8 features in this dataset. Seven of the features 
+                are binary features and represent gender, cough, fever, sore throat, shortness of breath, headache, and whether a patient’s age is above or below 60. All six features 
+                only take on two values 0 for false, and 1 for true.  A 0 for the gender feature represents male and a 1 represents female. The final feature is the reason that the 
+                individual is being tested. This feature can take any one of three values. A 2 for this feature means the individual traveled abroad, a 1 means that this person had 
+                confirmed contact with an infected individual and a 0 means their reason for testing was other. More details in the result section.
             </p>
             <img src="images/table1.png" alt="corona_data samples" class="center">
             <center><a href="Dataset/corona_data.csv" target="_blank">corona_data.csv</a> data samples</center>
 
             <h3>
-                <a id="methods" class="anchor" href="#methods" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Methods
+                <a id="methods" class="anchor" href="#methods" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link">
+                    Methods
+                </span></a>
             </h3>
             <h5><b>[CNN Methods]</b></h5>
             <p>
-                We implemented a CNN using Pytorch to be trained on a dataset containing images of chest X-rays as explained above in the Data Collection section. Our CNN contains several convolutional blocks 
-                that we train to extract features from our images. Inside of each convolutional block we have a convolution layer, a pooling layer, a ReLU nonlinearity and a batch normalization layer. After all 
-                of the convolutional blocks, we have a linear layer that produces the output of our network. Our CNN has only two outputs as we are training it to recognize two classes: COVID positive and COVID 
-                negative. Healthy individuals and individuals suffering from diseases other than COVID-19 all fall into the COVID negative class. When training our model we chose an 80/20 split for our data 
-                between training and testing and a batch size of 4. We use cross entropy loss as our network’s loss function. The cross entropy loss function implemented within Pytorch handles the softmax 
-                operation so that we can feed in our raw network output and class labels when calculating loss. During training, the optimizer that we use is stochastic gradient descent. We have landed on a 
-                learning rate of 0.003 and a momentum of 0.99. The training of our network was performed on a GPU instance of Google Colab. Utilizing a GPU instance and working with CUDA provided a large speed 
-                up to training.
+                We implemented a CNN using Pytorch that was trained on a dataset created by merging two existing datasets containing images of chest X-rays as explained above in 
+                the Data Collection section. Our CNN contains several convolutional blocks that we train to extract features from our images. Inside of each convolutional block we 
+                have a convolution layer, a pooling layer, a ReLU nonlinearity and a batch normalization layer. After all of the convolutional blocks, we have a linear layer that 
+                produces the output of our network. Our CNN has only two outputs as we are training it to recognize two classes: COVID positive and COVID negative. Healthy 
+                individuals and individuals suffering from diseases other than COVID-19 all fall into the COVID negative class. When training our model we chose an 80/20 split for 
+                our data between training and testing and a batch size of 4. Our network supports two loss functions for training. The first loss function supported by our network 
+                is Pytorch’s cross entropy loss. The cross entropy loss function implemented within Pytorch handles the softmax operation so that we can feed in our raw network 
+                output and class labels when calculating loss. Our network also supports class balanced focal loss. This is a loss function which was created to enable more effective 
+                training on unbalanced datasets. This loss function is not implemented within Pytorch. This meant that we had to implement it from scratch. We landed on a gamma of 1 
+                and a beta of 0.9999. These are hyperparameters specific to this loss function and they determine how heavily the loss function prioritizes underrepresented classes. 
+                During training, the optimizer that we use is stochastic gradient descent. We have landed on a learning rate of 0.003 and a momentum of 0.99. The training of our 
+                network was performed on a GPU instance of Google Colab. Utilizing a GPU instance and working with CUDA provided a large speed up to training.
             </p>
             <h5><b>[Logistic Regression with PCA]</b></h5>
             <p>
-                We ran Logistic regression with PCA on our <a href="Dataset/corona_data.csv" target="_blank">corona_data.csv</a>. The data used here is described in the earlier Data Collection section. Since 
-                the dataset labels are discrete (only 0 and 1), we chose to use classification, and logistic regression is a soft classification and it is easy to be implemented. To speed up the training 
-                process as the future data size will grow, we decided to use PCA before doing the logistic regression. Before running PCA we standardized the data since PCA yields a feature subspace that 
-                maximizes the variance along the axes.
+                We ran Logistic regression with PCA on our <a href="Dataset/corona_data.csv" target="_blank">corona_data.csv</a>. The data used here is described in the earlier Data 
+                Collection section. Since the dataset labels are discrete (only 0 and 1), we chose to use classification, and logistic regression is a soft classification and it is 
+                easy to be implemented. To speed up the training process as the future data size will grow, we decided to use PCA before doing the logistic regression. Before running 
+                PCA we standardized the data since PCA yields a feature subspace that maximizes the variance along the axes.
             </p>
             <img src="images/table2.png" alt="standardized data samples" class="center">
             <center>Standardized data samples with features visualization</center>
@@ -130,87 +148,115 @@
             <img src="images/table3.png" alt="feature-reduced data samples" class="center">
             <center>Feature-reduced data samples visualization</center>
             <p>
-                Then we trained on the updated feature-reduced data using logistic regression. To predict the new data(8 features), first, run the PCA fitted by training data to transform the data to 
-                6-feature-space data then predict on our trained model to get the result.
+                Then we trained on the updated feature-reduced data using logistic regression. To predict the new data(8 features), first, run the PCA fitted by training data to 
+                transform the data to 6-feature-space data then predict on our trained model to get the result.
             </p>
             <h5><b>[Lasso and Ridge Regression for Feature Selection Method]</b></h5>
             <p>
-                We ran lasso and ridge regression for feature selection on our cleaned corona_data.csv file. We first scaled the data set using a Min Max scaler in order to make the data more easily processed 
-                by the algorithms. Next, we split the data into 20% testing data and 80% training data.  After splitting our data we applied lasso regression for feature selection. After performing feature 
-                selection we trained on our data appropriately. Finally, we utilized a random forest classifier with 10,000 estimators and a random state of 0 to measure the accuracy of our data. After receiving 
-                the results for lasso regression, we also decided to run ridge regression on our cleaned corona_data.csv dataset. The data was scaled and split the same as it was for lasso regression. Then we 
-                applied ridge regression for feature selection and fit the data. Finally, we utilized another random forest classifier with the same parameters to measure the accuracy of our data.
+                We ran lasso and ridge regression for feature selection on our cleaned corona_data.csv file. We first scaled the data set using a Min Max scaler in order to make the 
+                data more easily processed by the algorithms. Next, we split the data into 20% testing data and 80% training data.  After splitting our data we applied lasso 
+                regression for feature selection. After performing feature selection we trained on our data appropriately. Finally, we utilized a random forest classifier with 
+                10,000 estimators and a random state of 0 to measure the accuracy of our data. After receiving the results for lasso regression, we also decided to run ridge 
+                regression on our cleaned corona_data.csv dataset. The data was scaled and split the same as it was for lasso regression. Then we applied ridge regression for 
+                feature selection and fit the data. Finally, we utilized another random forest classifier with the same parameters to measure the accuracy of our data.
             </p>
             <h5><b>[SVM Methods]</b></h5>
             <p>
-                We implemented a SVM in Scikit Learn to train on categorical symptom data to predict positive or negative COVID results. Prior to training the SVM, the size of the dataset was reduced by randomly 
-                undersampling the majority class (COVID negative). This was done for two reasons. Due to the kernel chosen for the SVM, the fitting time scaled quadratically (or more) with the number of 
-                datapoints, so training on the entire dataset was impractical. In addition, undersampling the majority class helped reduce the imbalance in data, improving the performance of the SVM. Note that 
-                undersampling was done on only the training data; testing data was left unaltered to capture the model’s true performance on data.
+                We implemented a SVM in Scikit Learn to train on categorical symptom data to predict positive or negative COVID results. Prior to training the SVM, the size of the 
+                dataset was reduced by randomly undersampling the majority class (COVID negative). This was done for two reasons. Due to the kernel chosen for the SVM, the fitting 
+                time scaled quadratically (or more) with the number of datapoints, so training on the entire dataset was impractical. In addition, undersampling the majority class 
+                helped reduce the imbalance in data, improving the performance of the SVM. Note that undersampling was done on only the training data; testing data was left 
+                unaltered to capture the model’s true performance on data.
             </p>
             <p>
-                Next, hyperparameters were tuned with 10 fold cross-validation. Hyperparameters tuned include: the ratio of negative test cases retained when undersampling data, the regularization constant, and 
-                gamma, and the kernel. For each set of hyperparameters, the confusion matrix and associated performance metrics of precision, recall, F1 score, and accuracy were calculated. The value that 
-                maximized the F1 score was chosen for each hyperparameter.
+                Next, hyperparameters were tuned with 10 fold cross-validation. Hyperparameters tuned include: the ratio of negative test cases retained when undersampling data, 
+                the regularization constant, and gamma, and the kernel. For each set of hyperparameters, the confusion matrix and associated performance metrics of precision, 
+                recall, F1 score, and accuracy were calculated. The value that maximized the F1 score was chosen for each hyperparameter.
             </p> 
+            <p>
+                Lastly, in an effort to further improve the performance of the model, ensemble learning methods were attempted with multiple SVM models. Bagging and boosting with 
+                SVMs were performed, and a hyperparameter sweep over the number of estimators and the maximum number of samples was performed. Ensemble methods were also 
+                implemented through Scikit Learn, and boosting in particular utilized the Adaboost algorithm. 
+            </p>
             <h5><b>[KNN Methods]</b></h5>
             <p>
-                We built a simple K-Nearest Neighbors model using Scikit Learn to classify the positive COVID-19 cases with two features (symptom score and contact status with others) from corona_data.csv after 
-                cleaning, which is described in the earlier section. Since there was a difficulty in building the model with little variations of the values in the data, the feature symptom score used to train 
-                this model was created by combining features in the original data.
+                We built a simple K-Nearest Neighbors model using Scikit Learn to classify the positive COVID-19 cases with two variables (symptom score and contact status with 
+                others). The data was drawn from corona_data.csv after cleaning, which is described in the earlier section. Since there was a difficulty in building the model with 
+                little variations of the values in the data, the feature symptom score used to train this model was created by combining values for each feature in the original data. 
             </p>
             <p>
-                For instance, the symptom score is a summation of all symptoms (cough, fever, sore_throat, shortness_of_breath, head_ache) for each patient where having a symptom counts 1 point for the symptom. 
-                Another feature for the data is the contact status of a patient with others, and the values for this feature were turned into digits from strings (Other ->  0, Contact with confirmed -> 1, 
-                Abroad -> 2) during data cleaning.
+                For instance, the symptom score is a summation of all symptoms (cough, fever, sore_throat, shortness_of_breath, head_ache) for each patient where having a symptom 
+                counts 1 point for the symptom. Another feature for the data is the contact status of a patient with others, and the values for this feature were turned into digits 
+                from strings (Other ->  0, Contact with confirmed -> 1, Abroad -> 2) during data cleaning.
+            </p>
+            <p>
+                Also, the hyper-parameter k, or the number of nearest neighbors used to train the model, was optimized using 10-fold cross-validation with Scikit Learn’s 
+                cross-validation score. The scores were evaluated from KNN models with odd numbers of k that range from 11 - 50. The optimal value of the k was chosen from the 
+                model with the least error value.
             </p>
 
             <h3>
-                <a id="results" class="anchor" href="#results" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Results
+                <a id="results" class="anchor" href="#results" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link">
+                    Results
+                </span></a>
             </h3>
             <h5><b>[CNN Results]</b></h5>
-            <img src="images/loss_acc_curves.PNG" alt="Loss and Accuracy Curves for CNN" class="center">
-            <center>Loss and Accuracy Curves for CNN</center>
+            <img src="images/loss_acc_curves.PNG" alt="Cross Entropy Loss and Accuracy Curves for CNN" class="center">
+            <center>Cross Entropy Loss and Accuracy Curves for CNN</center>
             <p>
-                The figure shown above includes the loss and accuracy curves for our CNN trained over 100 epochs. While the validation accuracy and loss initially follow the training accuracy and loss, we see 
-                them begin to diverge around the 37th epoch. While this could be seen as evidence for over fitting, this does not seem to be the case. The model’s highest validation accuracy of ~76% was actually 
-                achieved during the 99th epoch. This shows that the model was still learning generalizable features deep into training. The model’s highest training accuracy was ~97%. 
+                The figure shown above includes the loss and accuracy curves for our CNN trained on the small COVID dataset using cross entropy loss for 100 epochs. While the 
+                validation accuracy and loss initially follow the training accuracy and loss, we see them begin to diverge around the 37th epoch. While this could be seen as 
+                evidence for over fitting, this does not seem to be the case. The model’s highest validation accuracy of ~76% was actually achieved during the 99th epoch. This 
+                shows that the model was still learning generalizable features deep into training. The model’s highest training accuracy was ~97%. 
             </p>
             <p>
-                Another interesting feature of our results is that around the 37th epoch when training and validation accuracy and loss begin to diverge we see a steep drop in accuracy and a spike in loss for 
-                both training and validation. We are unsure of what exactly is causing this phenomenon but one hypothesis is that this is an example of “double descent” (Nakkiran, et al.). Double descent occurs 
-                when the effective model complexity (EMC) is approximately equal to the number of training examples. Increasing training time, increases EMC. This results in a loss curve which decreases at 
-                first, sharply increases as EMC approaches the number of training examples, and then decreases again as EMC increases beyond the number of training examples.
+                Another interesting feature of our results is that around the 37th epoch when training and validation accuracy and loss begin to diverge we see a steep drop in 
+                accuracy and a spike in loss for both training and validation. We are unsure of what exactly is causing this phenomenon but one hypothesis is that this is an 
+                example of “double descent” (Nakkiran, et al.). Double descent occurs when the effective model complexity (EMC) is approximately equal to the number of training 
+                examples. Increasing training time, increases EMC. This results in a loss curve which decreases at first, sharply increases as EMC approaches the number of training 
+                examples, and then decreases again as EMC increases beyond the number of training examples.
+            </p>
+            <img src="images/focal_loss_and_acc_curves.JPG" alt="Class Balanced Focal Loss and Accuracy Curves" class="center">
+            <center>Class Balanced Focal Loss and Accuracy Curves</center>
+            <p>
+                This figure shown above visualizes the loss and accuracy curves for our CNN trained on the combined COVID and pneumonia datasets using class balanced focal loss 
+                for 100 epochs. The network achieves a highest validation accuracy of ~84% in the 40th epoch. This is an 8% increase over our previous model’s highest validation 
+                accuracy of ~76%. This model actually achieved its highest training accuracy of ~97% in the 60th epoch. This is comparable to our previous model. Unlike our 
+                previous model, this model did not show continuous improvement throughout training. The highest validation accuracy occurred during the 40th epoch while the highest 
+                training accuracy occurred much later. After the model reached its highest training accuracy, the model’s training accuracies remained high throughout the rest of 
+                training. This was not true for validation accuracy. Following the high of ~84% we see accuracy decrease and remain at ~70% for the remainder of training. This seems 
+                to be a sign of overfitting and is different from the “double descent” phenomenon we observed with our previous network.
             </p>
             <h5><b>[Logistic Regression with PCA]</b></h5>
             <p>
-                We compare the accuracy of running logistic regression with PCA and to the accuracy score for running logistic regression without PCA. The results are similar for both. This is a positive result 
-                as it shows that PCA does not negatively impact our accuracy while speeding up our training process.
+                We compare the accuracy of running logistic regression with PCA and to the accuracy score for running logistic regression without PCA. The results are similar for 
+                both. This is a positive result as it shows that PCA does not negatively impact our accuracy while speeding up our training process.
             </p>
             <img src="images/RG_result.png" alt="comparison" class="center">
             <center>Comparing scores between logistic regression with/without PCA</center>
             <p>
-                From our accuracy results we conclude that logistic regression with PCA is a valid approach to predicting diagnosis with this time of binary feature data since the accuracy is about 95%. 
+                From our accuracy results we conclude that logistic regression with PCA is a valid approach to predicting diagnosis with this time of binary feature data since the 
+                accuracy is about 95%. 
             </p>
             <h5><b>[Lasso and Ridge Regression for Feature Selection Results]</b></h5>
             <p>
-                All 8 features from our binary feature dataset(<a href="Dataset/corona_data.csv" target="_blank">corona_data.csv</a>) were selected using lasso regression meaning none of the features had 
-                coefficients that shrank to zero after applying the algorithm. 
+                All 8 features from our binary feature dataset(<a href="Dataset/corona_data.csv" target="_blank">corona_data.csv</a>) were selected using lasso regression meaning 
+                none of the features had coefficients that shrank to zero after applying the algorithm. 
             </p>
             <img src="images/result1.png" alt="result1" class="center">
             <p>
-                The accuracy result was higher after applying lasso regression than with logistic regression alone. However, the F1, precision, and recall scores were significantly lower, so our previous data 
-                is most likely more valuable.
+                The accuracy result was higher after applying lasso regression than with logistic regression alone. However, the F1, precision, and recall scores were significantly 
+                lower, so our previous data is most likely more valuable.
             </p>
             <img src="images/result2.png" alt="result2" class="center">
             <p>
-                Since lasso regression was ineffective in reducing the number of features for our data, we decided to also apply ridge regression to our dataset for feature selection. Only 3 features of our 
-                dataset were selected using ridge regression. The features that were selected were sore_throat, shortness_of_breath, and head_ache.
+                Since lasso regression was ineffective in reducing the number of features for our data, we decided to also apply ridge regression to our dataset for feature 
+                selection. Only 3 features of our dataset were selected using ridge regression. The features that were selected were sore_throat, shortness_of_breath, and head_ache.
             </p>
             <img src="images/result3.png" alt="result3" class="center">
             <p>
-                The accuracy is about the same as our logistic regression results, however, F1 score, precision score, and recall are all significantly lower so we believe our logistic regression using PCA for 
-                feature selection data to be more accurate.
+                The accuracy is about the same as our logistic regression results, however, F1 score, precision score, and recall are all significantly lower so we believe our 
+                logistic regression using PCA for feature selection data to be more accurate.
             </p>
             <img src="images/result4.png" alt="result4" class="center">
             <br>
@@ -221,60 +267,146 @@
             </p>
             <img src="images/Undersampling_CV.png" alt="Undersampling_CV" class="center">
             <p>
-                The undersampling ratio is defined as the ratio of negative cases to positive cases left in the training data set after undersampling is performed. As shown above, accuracy is high at 96.4% when 
-                the undersampling ratio is 5. However, due to the unbalanced nature of the dataset, the recall and precision of the model is significantly lower. Therefore, the undersampling ratio of 5, which 
-                maximized the F1 score while maintaining a manageably small dataset, was chosen. This ratio was used for the remainder of the cross-validation.
+                The undersampling ratio is defined as the ratio of negative cases to positive cases left in the training data set after undersampling is performed. As shown above, 
+                accuracy is high at 96.4% when the undersampling ratio is 5. However, due to the unbalanced nature of the dataset, the recall and precision of the model is 
+                significantly lower. Therefore, the undersampling ratio of 5, which maximized the F1 score while maintaining a manageably small dataset, was chosen. This ratio was 
+                used for the remainder of the cross-validation.
             </p>
             <img src="images/Regularization_CV.png" alt="Regularization_CV" width="49%" style="display: inline-block">
             <img src="images/Gamma_CV.png" alt="Gamma_CV" width="49%" style="display: inline-block">
             <p>
-                The regularization strength of the model is inversely proportional to the plotted regularization strength. It appears that the performance of the model is mostly independent of the regularization 
-                and gamma hyperparameters of the SVM. The variation in F1 score is negligible across different values in the hyperparameters gamma and regularization strength. As such, the values of 
-                regularization and gamma were left at their default values as defined by Scikit learn. 
+                The regularization strength of the model is inversely proportional to the plotted regularization strength. It appears that the performance of the model is mostly 
+                independent of the regularization and gamma hyperparameters of the SVM. The variation in F1 score is negligible across different values in the hyperparameters gamma 
+                and regularization strength. As such, the values of regularization and gamma were left at their default values as defined by Scikit learn. 
             </p>
             <img src="images/Kernel_CV.png" alt="Kernel_CV" class="center">
             <p>
                 Lastly, the type of kernel implemented by the SVM was tested. A radial basis function kernel presents the highest accuracy and F1 score of 96.4% and 67.7% respectively.
             </p>
+            <p>
+                Ensemble methods were unable to significantly improve the performance of the model. For both bagging and boosting, for a number of estimators in the range (2 - 20) 
+                and for a maximum number of samples from (0.25 - 1.0), accuracy never exceeded the previously obtained maximum of 96.4% and the F1 score never exceeded the previous 
+                maximum of 67.7%.
+            </p>
             <h5><b>[KNN Results]</b></h5>
             <img src="images/knn_bar_graph.png" alt="knn_bar_graph" class="center">
             <p>
-                The graph above shows accuracy, precision, recall, and F-Beta scores for KNN with different numbers of nearest neighbors. Even though the accuracy was high with the value generally around 
-                0.93 - 0.96,  the precision, recall, and F-beta score (a weighted harmonic mean of the precision and recall) were not as high as the accuracy. However, when the number of nearest neighbors 
-                increased to 11, it showed that the accuracy and precision of the model improved, but other scores remained low. Overall, the KNN model yielded good accuracy, but its precision, recall, and 
-                F-beta score were not high enough that it cannot be concluded that the model is doing well at classifying positive COVID-19 cases. To improve scores in precision, recall, and F-beta, the model 
-                may need to be trained with different features from the data, and we need to optimize the number of nearest neighbors used in the model to yield better scores overall.
+                The graph above shows accuracy, precision, recall, and F-Beta scores for KNN with different numbers of nearest neighbors. Even though the accuracy was high with the 
+                value generally around 0.93 - 0.96,  the precision, recall, and F-beta score (a weighted harmonic mean of the precision and recall) were not as high as the accuracy. 
+                However, when the number of nearest neighbors was increased to 11, it showed that the accuracy and precision of the model improved, but other scores remained low.
+            </p>
+            <p>
+                Because the accuracy, precision, recall, and F-Beta scores varied with different values of k, the optimization of k was conducted with 10-fold cross-validation. 
+                After the cross-validation scores were computed, the mean squared errors for different k’s were computed. As the graph below shows, when k = 43, the MSE was 
+                minimized, so the optimal value of k is 43.
+            </p>
+            <img src="images/k_optimization.png" alt="Class Balanced Focal Loss and Accuracy Curves" class="center">
+            <br>
+            <p>
+                After the optimization of k, the KNN model was trained with k = 43 neighbors, and the result is as follow:
+            </p>
+            <img src="images/knn_score.jpg" alt="Class Balanced Focal Loss and Accuracy Curves" class="center">
+            <br>
+            <p>
+                The KNN model with k = 43 yielded generally higher scores in accuracy, precision, recall, and F-beta than the models with k = 3, 5, 7, 11. Therefore, it can be said 
+                that the optimization of the k had an impact on the improvement of the KNN model’s performance.
             </p>
 
             <h3>
-                <a id="discussion" class="anchor" href="#discussion" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Discussion
+                <a id="discussion" class="anchor" href="#discussion" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link">
+                    Discussion
+                </span></a>
             </h3>
             <h5><b>[CNN Discussion]</b></h5>
             <p>
-                We have several avenues to explore as we improve our CNN model. We believe that the primary limiting factor is a reduced access to data. One way to improve this situation is to incorporate 
-                another dataset, such as a large pneumonia dataset with our COVID-19 chest X-ray dataset. The addition of these chest X-rays would provide many more training examples for the COVID negative 
-                class. By training on more examples, we hope to improve generalization and increase testing accuracy. Of the available datasets, far more contain images of X-rays belonging to healthy individuals 
-                and individuals diagnosed with pneumonia or other respiratory illnesses than contain images of X-rays of COVID-19 patients. As we incorporate more negative examples, we expect to be required to 
-                change our loss function. As our classes become imbalanced we will switch our loss function from cross entropy loss to class balanced focal loss. This will help balance training across the 
-                positive and negative classes. Additionally, we can utilize data augmentation to synthetically increase the number of examples we have for the COVID positive class. We hope that by implementing 
-                these methods we will be able to increase the testing accuracy of our CNN.
+                After implementing and training our first model we knew we had several avenues to explore as we worked to improve our CNN. We hypothesized that the primary limiting 
+                factor for our model was a reduced access to data. Our plan to improve this situation was to incorporate another dataset into our training data. We did not have 
+                access to another dataset with COVID chest X-rays; however, there are many publicly available datasets that contain examples of chest X-rays from the COVID negative 
+                class. We decided to incorporate a large pneumonia dataset that was released as part of a Kaggle challenge. The addition of these training examples provided us with 
+                ~15000 X-rays belonging to the COVID negative class. Our COVID dataset had ~500 chest X-rays from COVID positive patients. This new data created a huge class 
+                imbalance between the COVID positive and COVID negative classes. We knew that it was necessary to adapt our training regime to the new class imbalance. We decided 
+                to change our loss function. As our classes became imbalanced we switched our loss function from cross entropy loss to class balanced focal loss. Class balanced 
+                focal loss balances gradient updates during training across imbalanced classes. After the addition of new data and incorporation of the new loss function we saw an 
+                ~8% increase to validation accuracy. This is a phenomenal accuracy improvement. If this model was applied for clinical use, an 8% accuracy improvement would mean 
+                2.5 million more correct diagnoses compared to our original model in the United States alone.
+            </p>
+            <h5><b>[Logistic Regression with PCA]</b></h5>
+            <p>
+                The performance of logistic regression with PCA is pretty good. Accuracy, F1 score, precision score, and recall score are all around 0.95, as we test the model using 
+                the test data we split originally from the data on <a href="Dataset/corona_data.csv" target="_blank">corona_data.csv</a>. So far there is no further improvement on 
+                the model but we discuss this may be a good model to choose to fit our problem.
+            </p>
+            <h5><b>[Feature selection using lasso and ridge regression Discussion]</b></h5>
+            <p>
+                Though the accuracy scores for both of the data sets after using feature selection using lasso and ridge regression were high, the F1 scores, precision scores, and 
+                recall scores were all significantly lower than our scores when we utilized logistic regression with PCA. After implementing feature selection using ridge regression 
+                on our data set, the features selected were sore_throat, shortness_of_breath, and head_ache. The majority of the data for these features were all values of 0 which 
+                most likely influenced the feature selection to target these features. Because the values did not vary significantly, we decided that feature selection using ridge 
+                regression may have favored features that did not provide valuable information.
             </p>
             <h5><b>[SVM Discussion]</b></h5>
             <p>
-                The performance of the SVM is mediocre. While the accuracy is relatively high, the precision and recall scores are significantly lower due to the unbalanced nature of the dataset. It is also 
-                notable that precision and recall are inversely related; increasing recall is at the expense of precision, and vice versa. This implies that we can tune the performance of the model to specific 
-                goals. If false negatives are to be avoided, then the data can be undersampled, such that the recall is high. This is at the expense of a lower precision, meaning that more false positives will 
-                occur. For the purposes of COVID diagnosis, it may be preferable to reduce false negatives to ensure that people do not unknowingly spread the disease, even if more healthy individuals are 
-                diagnosed as ill. 
+                The performance of the SVM is mediocre. While the accuracy is relatively high, the precision and recall scores are significantly lower due to the unbalanced nature 
+                of the dataset. It is also notable that precision and recall are inversely related; increasing recall is at the expense of precision, and vice versa. This implies 
+                that we can tune the performance of the model to specific goals. If false negatives are to be avoided, then the data can be undersampled, such that the recall is 
+                high. This is at the expense of a lower precision, meaning that more false positives will occur. For the purposes of COVID diagnosis, it may be preferable to reduce 
+                false negatives to ensure that people do not unknowingly spread the disease, even if more healthy individuals are diagnosed as ill. 
             </p>
             <p>
-                Further steps to improve the performance of an SVM model primarily revolve around addressing the ability to classify severely unbalanced classes. Indeed, relative to all other hyperparameters, 
-                artificially adjusting the ratio of positive to negative cases in the training data had the largest effect on the model’s performance. 
+                Further steps to improve the performance of an SVM model then revolved around addressing the ability to classify severely unbalanced classes. Indeed, relative to all 
+                other hyperparameters, artificially adjusting the ratio of positive to negative cases in the training data had the largest effect on the model’s performance. 
             </p>
             <p>
-                However, it is also possible that due to the small domain of each categorical feature (all but one feature were binary, and one was ternary) that the data is inherently inseparable by a 
-                hyper-plane or hyper-surface. If further adjustments fail to improve the precision and recall of the SVM, it can be concluded that a hard classifier such as an SVM is unsuitable for our data, 
-                and a soft classifier such as a logistic regression would be more suitable. 
+                Ensemble learning was unable to improve the accuracy of the model. In addition, any further hyperparameters tuned were unable to improve the performance of the SVM. 
+                We attribute this to the fact that due to the small domain of each categorical feature (all but one feature were binary, and one was ternary) that the data is 
+                inherently inseparable by a hyper-plane or hyper-surface. Indeed, examining the dataset, there are multiple data points which share the exact same attributes, and 
+                yet have different class labels. We conclude that a hard classifier such as an SVM is unsuitable for our data, and a soft classifier such as a logistic regression 
+                would be more suitable. 
+            </p>
+            <h5><b>[KNN Discussion]</b></h5>
+            <p>
+                As mentioned earlier, the lack of variation in the values of the data made a challenge in selecting which features to use to train the data. Also, it was difficult 
+                to find a method to improve the performance of the KNN because there were no clear methods that guarantee the improvement of the performance of KNN. It is reasonable 
+                to conclude that other prediction/classification models could perform better in the prediction of positive COVID-19 cases than the KNN model with the given data.
+            </p>
+
+            <h3>
+                <a id="conclusion" class="anchor" href="#conclusion" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link">
+                    Conclusions
+                </span></a>
+            </h3>
+            <h5><b>[CNN Discussion]</b></h5>
+            <p>
+                By merging datasets and adapting our training regime to a new loss function we developed a CNN with an accuracy of ~84%. This accuracy is still significantly below 
+                the >97% accuracy of human professionals, but it could still be high enough to act as a preliminary classifier that prioritizes patients based on likelihood of a 
+                positive COVID diagnosis. Prioritizing patients would have a large impact on the healthcare response to COVID and allow doctors and other medical professionals to 
+                more efficiently allocate their time. Another useful application of this model in a clinical setting could be as a diagnostic confirmation. A human diagnostician 
+                could use this model to confirm their own diagnoses and increase accuracy as well as their confidence.
+            </p>
+            <h5><b>[Logistic Regression with PCA]</b></h5>
+            <p>
+                After Comparing the performance of logistic regression with PCA(0.85 variance retained) and logistic regression without PCA, we get that not only does PCA not 
+                impact the accuracy, but also PCA speeds up the training process of logistic regression. We conclude performing PCA before Logistic regression is better. As we 
+                compare this model to other models we tried, this may be the best one to use.
+            </p>
+            <h5><b>[Feature selection using lasso and ridge regression Conclusion]</b></h5>
+            <p>
+                Our accuracy score for feature selection after using both lasso and ridge regression were high, however the other scores such as F1, precision, and recall were low 
+                compared to those scores that we calculated using Logistic Regression with PCA. Performing feature selection with lasso and ridge regression gave us good scores and 
+                was one of the most promising methods to refine our data set. However, our scores with Logistic Regression with PCA were higher and more consistent therefore, we 
+                decided that logistic regression with PCA was a better method to analyze our data.
+            </p>
+            <h5><b>[SVM Conclusion]</b></h5>
+            <p>
+                We were able to train a SVM classifier on categorical symptom data to achieve a 96% accuracy on predicting COVID. Despite the high accuracy however, the precision 
+                and recall scores were much lower at around 67%. Due to the inseparability of the data, and the failure of multiple methods to improve the performance of these 
+                thresholds, we conclude that this is the upper bound of the SVM’s performance on this particular dataset. Soft-classification methods should be instead used to 
+                achieve better results. 
+            </p>
+            <h5><b>[KNN Conclusion]</b></h5>
+            <p>
+                Even though the KNN model yielded better accuracy, precision, recall, and F-beta after the optimization of the hyperparameter, the precision, recall, and F-beta 
+                scores were not significantly high enough that it can be concluded that the model is not doing well at classifying positive COVID-19 cases. 
             </p>
 
             <h3>
